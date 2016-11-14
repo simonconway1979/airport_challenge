@@ -12,26 +12,20 @@ def initialize(weather = "calm", capacity = 20)
 @capacity = capacity
 end
 
-def landing_request(granted = true)
-if weather == "stormy"
-  granted = false
-puts "You do not have permission to land"
-elsif @plane.count == capacity
-  granted = false
-puts "You do not have permission to land"
-else
-  granted = true
-puts "You have permission to land"
-end
-granted
+def grant_permission
+  if weather == "stormy"
+    granted = false
+  elsif @plane.count >= capacity
+    granted = false
+  else
+    granted = true
+  end
+  granted
 end
 
-def landed(confirmed = true)
-  if confirmed == true
-  @plane << Plane.new
-  else
+def landed(plane)
+  @plane << plane
   @plane
-end
 end
 
 def take_off_request(granted = true)
